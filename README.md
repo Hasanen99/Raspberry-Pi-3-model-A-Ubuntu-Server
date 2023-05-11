@@ -26,6 +26,8 @@ x                                     //// x is the connection id as integer
 > select_network x
 > quit                                 //// Exit after complete
 ```
+Links: https://unix.stackexchange.com/questions/458406/network-manager-works-but-wlan-is-unavailable-for-nmcli
+       https://unix.stackexchange.com/questions/665107/how-to-connect-to-open-wifi-networks-using-wpa-cli
 Here we go now you have new network added.
 you can go again and run ```list_networks``` then you can connect any of the saved networks with ```select_network <id of the network from the list>``` and that's it.
 
