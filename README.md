@@ -12,19 +12,20 @@ Now from a PC (on the same network) open powershell and write ```ssh <user name 
 ## Connect to new WIFI network:
 You can use nmcli package command (install it first with ```sudo apt install network-manager```)
 in my case the best one works is wpa_cli, as below:
->wpa_cli wlan0
+```
+> wpa_cli wlan0
 Interactive mode:
->add_network
+> add_network
 x                                     //// x is the connection id as integer
->set_network x ssid "Network ssid"
->set_network x psk "Network password" //// if network has password
->set_network 0 key_mgmt NONE          //// if network has no password (open network)
->set_network x scan_ssid 1            //// if network is hidden ssid
->enable_network x
->save_config
->select_network x
->quit                                 //// Exit after complete
-
+> set_network x ssid "Network ssid"
+> set_network x psk "Network password" //// if network has password
+> set_network 0 key_mgmt NONE          //// if network has no password (open network)
+> set_network x scan_ssid 1            //// if network is hidden ssid
+> enable_network x
+> save_config
+> select_network x
+> quit                                 //// Exit after complete
+```
 Here we go now you have new network added.
 you can go again and run ```list_networks``` then you can connect any of the saved networks with ```select_network <id of the network from the list>``` and that's it.
 
