@@ -19,7 +19,7 @@ Interactive mode:
 x                                     //// x is the connection id as integer
 > set_network x ssid "Network ssid"
 > set_network x psk "Network password" //// if network has password
-> set_network 0 key_mgmt NONE          //// if network has no password (open network)
+> set_network x key_mgmt NONE          //// if network has no password (open network)
 > set_network x scan_ssid 1            //// if network is hidden ssid
 > enable_network x
 > save_config
