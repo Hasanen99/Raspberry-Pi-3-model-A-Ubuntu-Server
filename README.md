@@ -31,6 +31,7 @@ Links: https://unix.stackexchange.com/questions/458406/network-manager-works-but
 Here we go now you have new network added.
 you can go again and run ```list_networks``` then you can connect any of the saved networks with ```select_network <id of the network from the list>``` and that's it.
 
+## Netplan:
 Now after all the above you will find your raspberry pi connect to the network you set, but it will not save the networks you add (so that we saw ```FAIL``` after ```save_config``` command), cuz the file was used by wpa_supplicant to save configurations in previous versions is not exist any more :) instead their is a completly different package called **Netplan** (a utility for easily configuring networking on a linux system) 
 
 Now let's set networks using Netplan:
