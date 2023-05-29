@@ -31,3 +31,33 @@ Links: https://unix.stackexchange.com/questions/458406/network-manager-works-but
 Here we go now you have new network added.
 you can go again and run ```list_networks``` then you can connect any of the saved networks with ```select_network <id of the network from the list>``` and that's it.
 
+Now after all the above you will find your raspberry pi connect to the network you set, but it will not save the networks you add (so that we saw ```FAIL``` after ```save_config``` command), cuz the file was used by wpa_supplicant to save configurations in previous versions is not exist any more :) instead their is a completly different package called **Netplan** (a utility for easily configuring networking on a linux system) 
+
+Now let's set networks using Netplan:
+1- run: ```ls /etc/netplan/``` to see what configuration files exist (default you will find "50-cloud-init.yaml" file system created will contain the network we setted up in raspberry pi imager).
+2- run: ```cat /etc/netplan/*.yaml``` to see the content of any file with this extention in this folder.
+3- That file can't be write or edited (as i readed) so we should disable it by create file called "/etc/cloud/cloud.cfg.d/99-custom-networking.cfg" contain: network: {config: disabled}
+   by running: ```sudo nano /etc/cloud/cloud.cfg.d/99-custom-networking.cfg``` content: network: {config: disabled}
+4- Now create our configuration yaml such as "/etc/netplan/my-new-config.yaml" and i put this content:
+```
+#This is a configuration yaml for connecting networks H.A.SAHIB 28/5/2023
+network:
+    version: 2
+    wifis:
+        renderer: networkd
+        wlan0:
+            access-points:
+                <wifi network>:
+                    password: <network password>
+                <hidden open wifi network>: 
+                    hidden: true
+            dhcp4: true
+            optional: true
+ ```
+**Note:** Becarful with indentations and use spaces not tab, you can find the avilable content of the config file in:
+https://netplan.readthedocs.io/en/stable/netplan-yaml/
+
+5- We have build our yaml file, so now lets delete the default old one: ```sudo rm /etc/netplan/50-cloud-init.yaml```.
+6- Now run: ``` sudo netplan generate``` then ```sudo netplan apply```.
+7- ```sudo reboot``` and congradulations things will stuck in memory and being used every time.
+
